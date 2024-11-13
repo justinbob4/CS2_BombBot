@@ -1,9 +1,13 @@
-import pymem, pymem.process, os, time, datetime
+import pymem, pymem.process, os, time, datetime, requests
 
-dwPlantedC4 = 0x1810CC8
-m_nBombSite = 0xE84
-m_bBeingDefused = 0xEBC
-m_bBombDefused = 0xED4
+offsets = requests.get('https://raw.githubusercontent.com/sezzyaep/CS2-OFFSETS/refs/heads/main/offsets.json').json()
+client_dll = requests.get('https://raw.githubusercontent.com/sezzyaep/CS2-OFFSETS/refs/heads/main/client_dll.json').json()
+
+dwPlantedC4 = offsets['client.dll']['dwPlantedC4']
+m_nBombSite = client_dll['client.dll']['classes']['C_PlantedC4']['fields']['m_nBombSite']
+m_bBeingDefused = client_dll['client.dll']['classes']['C_PlantedC4']['fields']['m_bBeingDefused']
+m_bBombDefused = client_dll['client.dll']['classes']['C_PlantedC4']['fields']['m_bBombDefused']
+
 
 def main():
     print("BombBot started.")
